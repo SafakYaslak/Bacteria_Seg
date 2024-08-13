@@ -1,0 +1,167 @@
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+     <title>Image Processing Results</title>
+     <style>
+         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;500;700&display=swap');
+ 
+         body {
+             background: linear-gradient(135deg, #1c1e22 0%, #292b2f 100%);
+             color: #f5f6f7;
+             font-family: 'Poppins', sans-serif;
+             overflow-y: scroll;
+         }
+ 
+         .container {
+             margin-top: 30px;
+         }
+ 
+         h1 {
+             font-size: 2.5rem;
+             color: #61dafb;
+             margin-bottom: 40px;
+             text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+             font-family: 'Roboto', sans-serif;
+             text-align: center;
+         }
+ 
+         .image-pair, .original-and-processed {
+             margin-bottom: 30px;
+             padding: 15px;
+             border-radius: 10px;
+             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+             background-color: #292b2f;
+         }
+ 
+         .image-container {
+             display: inline-block;
+             margin-bottom: 20px;
+             position: relative;
+         }
+ 
+         .image-container img {
+             max-width: 100%;
+             height: auto;
+             border-radius: 8px;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+             transition: transform 0.3s ease;
+         }
+ 
+         .image-container img:hover {
+             transform: scale(1.05);
+         }
+ 
+         .text-center p {
+             color: #adb5bd;
+             font-size: 1.2rem;
+             font-family: 'Roboto', sans-serif;
+             margin-top: 10px;
+         }
+ 
+         .text-center p:hover {
+             color: #61dafb;
+         }
+ 
+         footer {
+             margin-top: 40px;
+             text-align: center;
+             color: #adb5bd;
+         }
+ 
+         @media (max-width: 768px) {
+             .image-pair, .original-and-processed {
+                 margin-bottom: 20px;
+                 padding: 15px;
+             }
+ 
+             h1 {
+                 font-size: 2rem;
+             }
+ 
+             .text-center p {
+                 font-size: 1rem;
+             }
+         }
+ 
+         /* Custom scrollbar */
+         ::-webkit-scrollbar {
+             width: 12px;
+         }
+ 
+         ::-webkit-scrollbar-track {
+             background: #1c1e22;
+         }
+ 
+         ::-webkit-scrollbar-thumb {
+             background-color: #61dafb;
+             border-radius: 10px;
+             border: 3px solid #1c1e22;
+         }
+     </style>
+ </head>
+ <body>
+     <div class="container">
+         <h1 class="text-center">Processed Image Results</h1>
+         {% if collage or image_with_boxes %}
+         <div class="row original-and-processed">
+             {% if collage %}
+             <div class="col-4 text-center">
+                 <div class="image-container">
+                     <img src="{{ url_for('uploaded_file', filename=original) }}" class="img-fluid" alt="Original Image">
+                     <p>Original Image</p>
+                 </div>
+             </div>
+             {% endif %}
+ 
+             {% if image_with_boxes %}
+             <div class="col-4 text-center">
+                 <div class="image-container">
+                     <img src="{{ url_for('processed_file', filename=image_with_boxes) }}" class="img-fluid" alt="Boxes">
+                     <p>Detected Objects</p>
+                 </div>
+             </div>
+             {% endif %}
+             <div class="col-4 text-center">
+                 <div class="image-container">
+                     <img src="{{ url_for('processed_file', filename=collage) }}" class="img-fluid" alt="Collage">
+                     <p>Collage of All Segmented Objects</p>
+                 </div>
+             </div>
+         </div>
+         {% endif %}
+         {% for index, pair in enumerate(image_pairs) %}
+         <div class="row image-pair">
+             <div class="col-3 text-center">
+                 <div class="image-container">
+                     <img src="{{ url_for('processed_file', filename=pair[0]) }}" class="img-fluid" alt="Detected Object">
+                     <p>Detected Object {{ index + 1 }}</p>
+                 </div>
+             </div>
+             <div class="col-3 text-center">
+                 <div class="image-container">
+                     <img src="{{ url_for('processed_file', filename=pair[1]) }}" class="img-fluid" alt="Segmented Image">
+                     <p>Segmented Object {{ index + 1 }}</p>
+                 </div>
+             </div>
+             <div class="col-3 text-center">
+                 <div class="image-container">
+                     <img src="{{ url_for('processed_file', filename=pair[2]) }}" class="img-fluid" alt="Masked Object">
+                     <p>Mask {{ index + 1 }}</p>
+                 </div>
+             </div>
+             <div class="col-3 text-center">
+                 <div class="image-container">
+                     <img src="{{ url_for('processed_file', filename=pair[3]) }}" class="img-fluid" alt="Canvas Without Mask Object">
+                     <p>Segment Without Mask {{ index + 1 }}</p>
+                 </div>
+             </div>
+         </div>
+         {% endfor %}
+     </div>
+ </body>
+ </html>
+ 

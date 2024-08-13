@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Upload - YOLOv8 & SAM2</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+        body {
+            background-color: #1c1e22;
+            color: #f5f6f7;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .upload-container {
+            background: #292b2f;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .upload-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+            border-radius: 12px;
+            z-index: 0;
+        }
+
+        h1 {
+            position: relative;
+            margin-bottom: 30px;
+            color: #61dafb;
+            font-size: 2.5em;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        h1::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #61dafb;
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        .custom-file-input ~ .custom-file-label::after {
+            content: "Browse";
+            background: #61dafb;
+            color: #1c1e22;
+            border-radius: 5px;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .custom-file-label {
+            color: #adb5bd;
+            background: #343a40;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: #61dafb;
+            border-color: #61dafb;
+            color: #1c1e22;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary:hover {
+            background-color: #4fa3c2;
+            border-color: #4fa3c2;
+        }
+
+        .custom-file-input:focus ~ .custom-file-label {
+            color: #61dafb;
+            background: #292b2f;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            background: rgba(97, 218, 251, 0.2);
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(97, 218, 251, 0.3);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <div class="highlight"></div>
+        <h1>Image Upload</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" name="file" class="custom-file-input" id="customFile" required>
+                    <label class="custom-file-label" for="customFile">Select File</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+</body>
+</html>
