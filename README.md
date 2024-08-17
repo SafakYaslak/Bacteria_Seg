@@ -1,15 +1,51 @@
-# Bacteria_Seg
-The project uses computer vision techniques to automatically detect and segment bacteria. Thanks to the combination of YOLOv8 and SAM2 models, the shapes and features of bacteria are analyzed in detail and presented to users. The project's web interface was developed with the Flask framework to provide a user-friendly experience.
+# Flask-Based Image Processing Application
+This project is a Flask-based web application that uses YOLO and SAM models to perform object detection and segmentation on uploaded images. The application processes the uploaded image, detects relevant objects, crops each object, and generates segmentation masks. These images are then combined into a collage and presented to the user along with the processed images.
 
-# Models:
-# YOLOv8
-Ultralytics' YOLOv8 model was trained with approximately 5,000 bacterial images. In the project, 80% was accepted as the minimum accuracy value.
-# SAM2
-Meta's newly released SAM2 segmentation model provides detailed segmentation by precisely determining object boundaries.
+# Features
+Image Upload: Users can upload image files through the web interface.
+Object Detection and Segmentation: Detects objects in uploaded images and performs segmentation using the SAM model.
+Visualization of Results: Combines detected objects with segmentation masks and presents them both individually and in a collage format.
+Downloadable Files: Processed images can be downloaded by the user.
 
-# Data Set:
-The data set used within the scope of the project was obtained from Roboflow. The data set was integrated into the model using the API. You can find more information about the dataset we used and the dataset itself at the link below:
+# Requirements
+Python 3.x
+Flask
+OpenCV
+NumPy
+Ultralytics YOLO
+Roboflow API
+Supervision
+Matplotlib
+Open3D
+Installation
+Clone this repository to your local machine:
 
+bash
+git clone https://github.com/yourusername/flask-image-processing-app.git
+cd flask-image-processing-app
+Install the required Python packages:
+
+bash
+
+pip install -r requirements.txt
+Create the necessary folders for UPLOAD_FOLDER and PROCESSED_FOLDER:
+
+bash
+
+mkdir upload_path processed_path
+Download and place the required YOLO and SAM models in the directories specified by yolo_model_path and sam_model_path.
+
+Set up the inference.py file and add your Roboflow API key.
+
+# File Structure
+app.py: The main file for the Flask application.
+templates/: Contains the HTML files.
+static/: Contains static files (CSS, JS).
+upload_path/: Stores uploaded images.
+processed_path/: Stores processed images.
+
+# License
+This project is licensed under the MIT License. 
 https://lnkd.in/d2GQutwY
 Author: Rithul
 Type: { Open Source Dataset }
