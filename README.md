@@ -17,20 +17,13 @@ Roboflow API
 Supervision
 Matplotlib
 Open3D
-Installation
-Clone this repository to your local machine:
 
-bash
-git clone https://github.com/yourusername/flask-image-processing-app.git
-cd flask-image-processing-app
-Install the required Python packages:
 
-bash
 
-pip install -r requirements.txt
+
 Create the necessary folders for UPLOAD_FOLDER and PROCESSED_FOLDER:
 
-bash
+
 
 mkdir upload_path processed_path
 Download and place the required YOLO and SAM models in the directories specified by yolo_model_path and sam_model_path.
